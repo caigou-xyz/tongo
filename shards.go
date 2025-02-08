@@ -1,7 +1,7 @@
 package tongo
 
 import (
-	"github.com/tonkeeper/tongo/ton"
+	"github.com/caigou-xyz/tongo/ton"
 )
 
 type ShardID = ton.ShardID

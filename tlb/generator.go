@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tonkeeper/tongo/tlb/parser"
+	"github.com/caigou-xyz/tongo/tlb/parser"
 )
 
 var bitsSizes = []int{80, 96, 256, 264, 320, 352, 512}
@@ -32,7 +32,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tonkeeper/tongo/boc"
+	"github.com/caigou-xyz/tongo/boc"
 )
 `)
 	if err != nil {

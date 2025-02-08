@@ -3,8 +3,8 @@ package precompiled
 import (
 	"math/big"
 
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/tlb"
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/tlb"
 )
 
 func jettonV1getWalletData(data *boc.Cell, args tlb.VmStack) (tlb.VmStack, error) {

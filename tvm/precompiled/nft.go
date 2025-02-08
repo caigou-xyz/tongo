@@ -1,9 +1,10 @@
 package precompiled
 
 import (
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/tlb"
 	"math/big"
+
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/tlb"
 )
 
 func nftV1getNftData(data *boc.Cell, args tlb.VmStack) (tlb.VmStack, error) {

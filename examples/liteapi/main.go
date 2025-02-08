@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/tonkeeper/tongo"
-	"github.com/tonkeeper/tongo/liteapi"
+	"github.com/caigou-xyz/tongo"
+	"github.com/caigou-xyz/tongo/liteapi"
 )
 
 func main() {

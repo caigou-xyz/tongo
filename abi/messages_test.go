@@ -2,11 +2,12 @@ package abi
 
 import (
 	"fmt"
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/tlb"
-	"github.com/tonkeeper/tongo/ton"
 	"reflect"
 	"testing"
+
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/tlb"
+	"github.com/caigou-xyz/tongo/ton"
 )
 
 func TestEncodeAndDecodeInMsgBody(t *testing.T) {

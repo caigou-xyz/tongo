@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tonkeeper/tongo/config"
-	"github.com/tonkeeper/tongo/liteclient"
+	"github.com/caigou-xyz/tongo/config"
+	"github.com/caigou-xyz/tongo/liteclient"
 )
 
 func createTestLiteServerConnection() (*liteclient.Connection, error) {
