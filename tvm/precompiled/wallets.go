@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/tlb"
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/tlb"
 )
 
 func walletv3seqno(data *boc.Cell, args tlb.VmStack) (tlb.VmStack, error) {

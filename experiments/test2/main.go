@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/tonkeeper/tongo/tlb/parser"
+
+	"github.com/caigou-xyz/tongo/tlb/parser"
 )
 
 var SOURCE = `

@@ -4,9 +4,9 @@ import (
 	"crypto/ed25519"
 	"math/rand"
 
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/tlb"
-	"github.com/tonkeeper/tongo/ton"
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/tlb"
+	"github.com/caigou-xyz/tongo/ton"
 )
 
 // DataHighloadV2 represents data of a highload-wallet contract.

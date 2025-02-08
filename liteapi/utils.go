@@ -3,8 +3,8 @@ package liteapi
 import (
 	"fmt"
 
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/tlb"
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/tlb"
 )
 
 // VerifySendMessagePayload verifies that the given payload is an external message ready to be sent to the blockchain.

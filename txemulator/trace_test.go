@@ -4,12 +4,12 @@ import (
 	"context"
 	"testing"
 
-	"github.com/tonkeeper/tongo/boc"
-	"github.com/tonkeeper/tongo/liteapi"
-	"github.com/tonkeeper/tongo/tlb"
-	"github.com/tonkeeper/tongo/ton"
-	"github.com/tonkeeper/tongo/tontest"
-	"github.com/tonkeeper/tongo/wallet"
+	"github.com/caigou-xyz/tongo/boc"
+	"github.com/caigou-xyz/tongo/liteapi"
+	"github.com/caigou-xyz/tongo/tlb"
+	"github.com/caigou-xyz/tongo/ton"
+	"github.com/caigou-xyz/tongo/tontest"
+	"github.com/caigou-xyz/tongo/wallet"
 )
 
 const SEED = "way label strategy scheme park virtual walnut illegal fringe once state defense museum bone satoshi feel diary buddy notice solve moral maple video local"

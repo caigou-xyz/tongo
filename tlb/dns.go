@@ -2,7 +2,8 @@ package tlb
 
 import (
 	"fmt"
-	"github.com/tonkeeper/tongo/boc"
+
+	"github.com/caigou-xyz/tongo/boc"
 )
 
 // DNSRecordSet

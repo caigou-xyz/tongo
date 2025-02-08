@@ -7,8 +7,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/tonkeeper/tongo/liteapi"
-	"github.com/tonkeeper/tongo/ton"
+	"github.com/caigou-xyz/tongo/liteapi"
+	"github.com/caigou-xyz/tongo/ton"
 )
 
 func TestResolve(t *testing.T) {

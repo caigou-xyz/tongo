@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tonkeeper/tongo/liteapi"
+	"github.com/caigou-xyz/tongo/liteapi"
 )
 
 func TestGenerateAndVerifyPayload(t *testing.T) {

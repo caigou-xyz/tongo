@@ -9,12 +9,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/caigou-xyz/tongo/abi"
+	"github.com/caigou-xyz/tongo/contract/dns"
+	"github.com/caigou-xyz/tongo/liteapi"
+	"github.com/caigou-xyz/tongo/tlb"
+	"github.com/caigou-xyz/tongo/ton"
 	"github.com/snksoft/crc"
-	"github.com/tonkeeper/tongo/abi"
-	"github.com/tonkeeper/tongo/contract/dns"
-	"github.com/tonkeeper/tongo/liteapi"
-	"github.com/tonkeeper/tongo/tlb"
-	"github.com/tonkeeper/tongo/ton"
 )
 
 const (

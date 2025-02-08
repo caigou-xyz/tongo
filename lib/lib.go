@@ -1,6 +1,6 @@
 package lib
 
 import (
-	_ "github.com/tonkeeper/tongo/lib/darwin"
-	_ "github.com/tonkeeper/tongo/lib/linux"
+	_ "github.com/caigou-xyz/tongo/lib/darwin"
+	_ "github.com/caigou-xyz/tongo/lib/linux"
 )

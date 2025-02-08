@@ -4,9 +4,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/tonkeeper/tongo/tl/parser"
 	"io/ioutil"
 	"os"
+
+	"github.com/caigou-xyz/tongo/tl/parser"
 )
 
 func main() {
@@ -42,7 +43,7 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
-	"github.com/tonkeeper/tongo/tl"
+	"github.com/caigou-xyz/tongo/tl"
 	"io"
 )
 `)

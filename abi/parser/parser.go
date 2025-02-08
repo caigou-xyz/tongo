@@ -3,7 +3,7 @@ package parser
 import (
 	"encoding/xml"
 
-	"github.com/tonkeeper/tongo/utils"
+	"github.com/caigou-xyz/tongo/utils"
 )
 
 type ABI struct {

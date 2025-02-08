@@ -1,7 +1,7 @@
 package ton
 
 import (
-	"github.com/tonkeeper/tongo/tlb"
+	"github.com/caigou-xyz/tongo/tlb"
 )
 
 // Address identifies an account in the TON network.

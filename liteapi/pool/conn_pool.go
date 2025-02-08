@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tonkeeper/tongo/config"
-	"github.com/tonkeeper/tongo/liteclient"
-	"github.com/tonkeeper/tongo/ton"
+	"github.com/caigou-xyz/tongo/config"
+	"github.com/caigou-xyz/tongo/liteclient"
+	"github.com/caigou-xyz/tongo/ton"
 )
 
 const (
