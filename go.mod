@@ -4,7 +4,7 @@ go 1.23.3
 
 require (
 	github.com/alecthomas/participle/v2 v2.0.0-beta.5
-	github.com/caigou-xyz/aegis v0.0.0-20250209074227-77afe46295c8
+	github.com/caigou-xyz/aegis v0.0.0-20250209091728-2f2dbaf901f7
 	github.com/oasisprotocol/curve25519-voi v0.0.0-20230904125328-1f23a7beb09a
 	github.com/snksoft/crc v1.1.0
 	github.com/stretchr/testify v1.10.0
