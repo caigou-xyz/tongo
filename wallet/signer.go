@@ -35,20 +35,21 @@ type RemoteSigner struct {
 	publicKey ed25519.PublicKey
 }
 
-func NewRemoteSigner(client *client.Client, address string) (signer.Signer, error) {
+func NewRemoteSigner(client *client.Client, address string, publicKey ed25519.PublicKey) (signer.Signer, error) {
 	_, err := ton.AccountIDFromBase64Url(address)
 	if err != nil {
 		return nil, err
 	}
 
-	account, err := client.GetTONAccount(context.Background(), address)
-	if err != nil {
-		return nil, err
-	}
-
-	publicKey, err := hex.DecodeString(strings.TrimPrefix(account.PublicKeyHex, "0x"))
-	if err != nil {
-		return nil, err
+	if publicKey == nil {
+		account, err := client.GetTONAccount(context.Background(), address)
+		if err != nil {
+			return nil, err
+		}
+		publicKey, err = hex.DecodeString(strings.TrimPrefix(account.PublicKeyHex, "0x"))
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return &RemoteSigner{
