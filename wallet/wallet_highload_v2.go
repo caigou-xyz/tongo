@@ -2,6 +2,7 @@ package wallet
 
 import (
 	"crypto/ed25519"
+	"github.com/caigou-xyz/tongo/signer"
 	"math/rand"
 
 	"github.com/caigou-xyz/tongo/boc"
@@ -57,7 +58,7 @@ func (w *walletHighloadV2) maxMessageNumber() int {
 	return 254
 }
 
-func (w *walletHighloadV2) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
+func (w *walletHighloadV2) createSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
 	boundedID := uint64(msgConfig.ValidUntil.UTC().Unix()<<32) + uint64(rand.Uint32())
 	body := HighloadV2Message{
 		SubWalletId:    w.subWalletID,
@@ -68,7 +69,7 @@ func (w *walletHighloadV2) createSignedMsgBodyCell(privateKey ed25519.PrivateKey
 	if err := tlb.Marshal(bodyCell, body); err != nil {
 		return nil, err
 	}
-	return signBodyCell(*bodyCell, privateKey)
+	return signBodyCell(*bodyCell, signer)
 }
 
 func (w *walletHighloadV2) NextMessageParams(state tlb.ShardAccount) (NextMsgParams, error) {

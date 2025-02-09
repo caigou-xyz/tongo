@@ -2,6 +2,7 @@ package wallet
 
 import (
 	"crypto/ed25519"
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo/boc"
 	"github.com/caigou-xyz/tongo/tlb"
@@ -50,7 +51,7 @@ func (w *walletV1V2) maxMessageNumber() int {
 	return 4
 }
 
-func (w *walletV1V2) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
+func (w *walletV1V2) createSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
 	panic("implement me")
 }
 

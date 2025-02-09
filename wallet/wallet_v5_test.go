@@ -2,7 +2,6 @@ package wallet
 
 import (
 	"context"
-	"crypto/ed25519"
 	"encoding/hex"
 	"reflect"
 	"testing"
@@ -147,7 +146,11 @@ func Test_walletV5R1_generateAddress(t *testing.T) {
 				t.Fatalf("hex.DecodeString() error = %v", err)
 			}
 
-			publicKey := ed25519.PrivateKey(privateKey).Public().(ed25519.PublicKey)
+			signer := NewPrivateKeySigner(privateKey)
+			publicKey, err := signer.PublicKey()
+			if err != nil {
+				t.Fatalf("PublicKey() error = %v", err)
+			}
 			w := NewWalletV5R1(publicKey, applyOptions(tt.opts...))
 			address, err := w.generateAddress()
 			if err != nil {

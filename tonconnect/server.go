@@ -12,6 +12,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
+	"github.com/caigou-xyz/tongo/signer"
 	"math/big"
 	"strconv"
 	"strings"
@@ -310,8 +311,8 @@ func signatureVerify(pubKey ed25519.PublicKey, message, signature []byte) bool {
 	return ed25519.Verify(pubKey, message, signature)
 }
 
-func signMessage(privateKey ed25519.PrivateKey, message []byte) []byte {
-	return ed25519.Sign(privateKey, message)
+func signMessage(signer signer.Signer, message []byte) ([]byte, error) {
+	return signer.Sign(message)
 }
 
 func ParseStateInit(stateInit string) ([]byte, error) {

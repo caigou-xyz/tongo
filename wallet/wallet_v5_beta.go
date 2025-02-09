@@ -3,6 +3,7 @@ package wallet
 import (
 	"crypto/ed25519"
 	"fmt"
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo/boc"
 	"github.com/caigou-xyz/tongo/tlb"
@@ -148,7 +149,7 @@ func (w *walletV5Beta) CreateMsgBodyWithoutSignature(internalMessages []RawMessa
 
 }
 
-func (w *walletV5Beta) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
+func (w *walletV5Beta) createSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
 	actions := make([]W5SendMessageAction, 0, len(internalMessages))
 	for _, msg := range internalMessages {
 		actions = append(actions, W5SendMessageAction{
@@ -174,7 +175,7 @@ func (w *walletV5Beta) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, in
 	if err := tlb.Marshal(bodyCell, msg); err != nil {
 		return nil, err
 	}
-	signature, err := bodyCell.Sign(privateKey)
+	signature, err := bodyCell.Sign(signer)
 	if err != nil {
 		return nil, err
 	}

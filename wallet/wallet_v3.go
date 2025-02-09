@@ -2,6 +2,7 @@ package wallet
 
 import (
 	"crypto/ed25519"
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo/boc"
 	"github.com/caigou-xyz/tongo/tlb"
@@ -55,7 +56,7 @@ func (w *walletV3) maxMessageNumber() int {
 	return 4
 }
 
-func (w *walletV3) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
+func (w *walletV3) createSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
 	body := MessageV3{
 		SubWalletId: w.subWalletID,
 		ValidUntil:  uint32(msgConfig.ValidUntil.Unix()),
@@ -66,7 +67,7 @@ func (w *walletV3) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, intern
 	if err := tlb.Marshal(bodyCell, body); err != nil {
 		return nil, err
 	}
-	return signBodyCell(*bodyCell, privateKey)
+	return signBodyCell(*bodyCell, signer)
 }
 
 func (w *walletV3) NextMessageParams(state tlb.ShardAccount) (NextMsgParams, error) {

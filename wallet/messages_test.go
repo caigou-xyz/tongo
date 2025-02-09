@@ -182,7 +182,7 @@ func TestSignedMsgBody_Verify(t *testing.T) {
 			if err := bodyCell.WriteBytes([]byte("hello")); err != nil {
 				t.Fatalf("WriteBytes() failed: %v", err)
 			}
-			signBytes, err := bodyCell.Sign(tt.privateKey)
+			signBytes, err := bodyCell.Sign(NewPrivateKeySigner(tt.privateKey))
 			if err != nil {
 				t.Fatalf("Sign() failed: %v", err)
 			}

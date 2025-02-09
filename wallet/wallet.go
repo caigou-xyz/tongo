@@ -5,6 +5,7 @@ import (
 	"crypto/ed25519"
 	"errors"
 	"fmt"
+	"github.com/caigou-xyz/tongo/signer"
 	"time"
 
 	"github.com/caigou-xyz/tongo/boc"
@@ -14,7 +15,7 @@ import (
 
 type Wallet struct {
 	ver        Version
-	key        ed25519.PrivateKey
+	key        signer.Signer
 	address    ton.AccountID
 	intWallet  wallet
 	blockchain blockchain
@@ -27,15 +28,13 @@ func DefaultWalletFromSeed(seed string, blockchain blockchain) (Wallet, error) {
 	if err != nil {
 		return Wallet{}, err
 	}
-	return New(pk, V4R2, blockchain)
+	return New(NewPrivateKeySigner(pk), V4R2, blockchain)
 }
 
 type Options struct {
 	NetworkGlobalID *int32
 	Workchain       *int
 	SubWalletID     *uint32
-	PublicKey       *ed25519.PublicKey
-	PrivateKey      *ed25519.PrivateKey
 	MsgLifetime     time.Duration
 }
 
@@ -80,9 +79,13 @@ func applyOptions(opts ...Option) Options {
 // subWalletId is only used in V3 and V4 wallets. Use nil for default value.
 // The version number is associated with a specific implementation of the wallet code
 // (https://github.com/toncenter/tonweb/blob/master/src/contract/wallet/WalletSources.md)
-func New(key ed25519.PrivateKey, ver Version, blockchain blockchain, opts ...Option) (Wallet, error) {
+func New(signer signer.Signer, ver Version, blockchain blockchain, opts ...Option) (Wallet, error) {
 	options := applyOptions(opts...)
-	w, err := newWallet(key.Public().(ed25519.PublicKey), ver, options)
+	publicKey, err := signer.PublicKey()
+	if err != nil {
+		return Wallet{}, err
+	}
+	w, err := newWallet(publicKey, ver, options)
 	if err != nil {
 		return Wallet{}, err
 	}
@@ -92,7 +95,7 @@ func New(key ed25519.PrivateKey, ver Version, blockchain blockchain, opts ...Opt
 	}
 	return Wallet{
 		address:            address,
-		key:                key,
+		key:                signer,
 		ver:                ver,
 		intWallet:          w,
 		blockchain:         blockchain,

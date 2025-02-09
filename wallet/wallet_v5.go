@@ -3,6 +3,7 @@ package wallet
 import (
 	"crypto/ed25519"
 	"fmt"
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo/boc"
 	"github.com/caigou-xyz/tongo/tlb"
@@ -89,7 +90,7 @@ type extV5R1SignedMessage struct {
 	ExtendedActions *W5ExtendedActions `tlb:"maybe"`
 }
 
-func (w *walletV5R1) CreateSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, extensionsActions *W5ExtendedActions, msgConfig MessageConfig) (*boc.Cell, error) {
+func (w *walletV5R1) CreateSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, extensionsActions *W5ExtendedActions, msgConfig MessageConfig) (*boc.Cell, error) {
 	actions := make([]W5SendMessageAction, 0, len(internalMessages))
 	for _, msg := range internalMessages {
 		actions = append(actions, W5SendMessageAction{
@@ -112,7 +113,7 @@ func (w *walletV5R1) CreateSignedMsgBodyCell(privateKey ed25519.PrivateKey, inte
 	if err := tlb.Marshal(bodyCell, msg); err != nil {
 		return nil, err
 	}
-	signature, err := bodyCell.Sign(privateKey)
+	signature, err := bodyCell.Sign(signer)
 	if err != nil {
 		return nil, err
 	}
@@ -122,8 +123,8 @@ func (w *walletV5R1) CreateSignedMsgBodyCell(privateKey ed25519.PrivateKey, inte
 	return bodyCell, nil
 }
 
-func (w *walletV5R1) createSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
-	return w.CreateSignedMsgBodyCell(privateKey, internalMessages, nil, msgConfig)
+func (w *walletV5R1) createSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error) {
+	return w.CreateSignedMsgBodyCell(signer, internalMessages, nil, msgConfig)
 }
 
 func (w *walletV5R1) NextMessageParams(state tlb.ShardAccount) (NextMsgParams, error) {

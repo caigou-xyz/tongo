@@ -3,6 +3,7 @@ package wallet
 import (
 	"crypto/ed25519"
 	"fmt"
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo/boc"
 	"github.com/caigou-xyz/tongo/tlb"
@@ -18,7 +19,7 @@ type wallet interface {
 	generateAddress() (ton.AccountID, error)
 	generateStateInit() (*tlb.StateInit, error)
 	maxMessageNumber() int
-	createSignedMsgBodyCell(privateKey ed25519.PrivateKey, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error)
+	createSignedMsgBodyCell(signer signer.Signer, internalMessages []RawMessage, msgConfig MessageConfig) (*boc.Cell, error)
 	NextMessageParams(state tlb.ShardAccount) (NextMsgParams, error)
 }
 
@@ -67,8 +68,8 @@ func generateAddress(workchain int, stateInit tlb.StateInit) (ton.AccountID, err
 	return ton.AccountID{Workchain: int32(workchain), Address: hash}, nil
 }
 
-func signBodyCell(bodyCell boc.Cell, privateKey ed25519.PrivateKey) (*boc.Cell, error) {
-	signBytes, err := bodyCell.Sign(privateKey)
+func signBodyCell(bodyCell boc.Cell, signer signer.Signer) (*boc.Cell, error) {
+	signBytes, err := bodyCell.Sign(signer)
 	if err != nil {
 		return nil, fmt.Errorf("can not sign wallet message body: %v", err)
 	}

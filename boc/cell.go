@@ -1,11 +1,11 @@
 package boc
 
 import (
-	"crypto/ed25519"
 	"encoding/base64"
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"github.com/caigou-xyz/tongo/signer"
 	"math/big"
 	"strings"
 )
@@ -357,12 +357,12 @@ func (c *Cell) RefsAvailableForRead() int {
 	return c.RefsSize() - c.refCursor
 }
 
-func (c *Cell) Sign(key ed25519.PrivateKey) ([]byte, error) {
+func (c *Cell) Sign(signer signer.Signer) ([]byte, error) {
 	hash, err := c.Hash()
 	if err != nil {
 		return nil, err
 	}
-	return ed25519.Sign(key, hash[:]), nil
+	return signer.Sign(hash)
 }
 
 func (c *Cell) BitsAvailableForWrite() int {
