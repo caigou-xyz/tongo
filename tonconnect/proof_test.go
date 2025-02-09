@@ -2,7 +2,6 @@ package tonconnect
 
 import (
 	"context"
-	"crypto/ed25519"
 	"testing"
 	"time"
 
@@ -46,7 +45,12 @@ func TestCreateSignedProof(t *testing.T) {
 			if err != nil {
 				t.Fatalf("SeedToPrivateKey() failed: %v", err)
 			}
-			publicKey := privateKey.Public().(ed25519.PublicKey)
+			signer := wallet.NewPrivateKeySigner(privateKey)
+			publicKey, err := signer.PublicKey()
+			if err != nil {
+				t.Fatalf("PublicKey() failed: %v", err)
+			}
+
 			stateInit, err := wallet.GenerateStateInit(publicKey, tt.version, nil, 0, nil)
 			if err != nil {
 				t.Fatalf("GenerateStateInit() failed: %v", err)
@@ -55,7 +59,7 @@ func TestCreateSignedProof(t *testing.T) {
 			if err != nil {
 				t.Fatalf("GenerateWalletAddress() failed: %v", err)
 			}
-			signedProof, err := CreateSignedProof(payload, accountID, privateKey, stateInit, ProofOptions{Timestamp: time.Now(), Domain: "web"})
+			signedProof, err := CreateSignedProof(payload, accountID, signer, stateInit, ProofOptions{Timestamp: time.Now(), Domain: "web"})
 			if err != nil {
 				t.Fatalf("CreateSignedProof() failed: %v", err)
 			}
