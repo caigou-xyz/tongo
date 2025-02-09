@@ -39,7 +39,7 @@ func TestRemoteSigner(t *testing.T) {
 	require.NoError(t, err)
 
 	// 创建 RemoteSigner
-	signer, err := NewRemoteSigner(client.NewClient(userPrivateKey, "http://127.0.0.1:49152"), test_utils.TONV4R2Addresses[0])
+	signer, err := NewRemoteSigner(client.NewClient(userPrivateKey, "http://127.0.0.1:49152"), test_utils.TONV4R2Addresses[0], nil)
 	assert.NoError(t, err)
 
 	// 使用原始 PrivateKey
@@ -78,7 +78,7 @@ func TestSignerConsistency(t *testing.T) {
 	// 创建 RemoteSigner
 	userPrivateKey, err := hex.DecodeString(test_utils.UserPrivateKey)
 	require.NoError(t, err)
-	remoteSigner, err := NewRemoteSigner(client.NewClient(userPrivateKey, "http://127.0.0.1:49152"), testAddress)
+	remoteSigner, err := NewRemoteSigner(client.NewClient(userPrivateKey, "http://127.0.0.1:49152"), testAddress, nil)
 	assert.NoError(t, err)
 
 	// 获取两种签名器的签名结果
