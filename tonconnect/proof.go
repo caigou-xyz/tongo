@@ -2,8 +2,9 @@ package tonconnect
 
 import (
 	"encoding/base64"
-	"github.com/caigou-xyz/tongo/signer"
 	"time"
+
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo"
 	"github.com/caigou-xyz/tongo/boc"

@@ -2,8 +2,9 @@ package wallet
 
 import (
 	"crypto/ed25519"
-	"github.com/caigou-xyz/tongo/signer"
 	"math/rand"
+
+	"github.com/caigou-xyz/tongo/signer"
 
 	"github.com/caigou-xyz/tongo/boc"
 	"github.com/caigou-xyz/tongo/tlb"

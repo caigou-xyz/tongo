@@ -5,9 +5,10 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/caigou-xyz/tongo/signer"
 	"math/big"
 	"strings"
+
+	"github.com/caigou-xyz/tongo/signer"
 )
 
 const BOCSizeLimit = 65536
