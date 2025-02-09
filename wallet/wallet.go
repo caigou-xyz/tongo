@@ -81,11 +81,7 @@ func applyOptions(opts ...Option) Options {
 // (https://github.com/toncenter/tonweb/blob/master/src/contract/wallet/WalletSources.md)
 func New(signer signer.Signer, ver Version, blockchain blockchain, opts ...Option) (Wallet, error) {
 	options := applyOptions(opts...)
-	publicKey, err := signer.PublicKey()
-	if err != nil {
-		return Wallet{}, err
-	}
-	w, err := newWallet(publicKey, ver, options)
+	w, err := newWallet(signer.PublicKey(), ver, options)
 	if err != nil {
 		return Wallet{}, err
 	}

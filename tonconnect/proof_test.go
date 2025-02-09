@@ -46,10 +46,7 @@ func TestCreateSignedProof(t *testing.T) {
 				t.Fatalf("SeedToPrivateKey() failed: %v", err)
 			}
 			signer := wallet.NewPrivateKeySigner(privateKey)
-			publicKey, err := signer.PublicKey()
-			if err != nil {
-				t.Fatalf("PublicKey() failed: %v", err)
-			}
+			publicKey := signer.PublicKey()
 
 			stateInit, err := wallet.GenerateStateInit(publicKey, tt.version, nil, 0, nil)
 			if err != nil {
