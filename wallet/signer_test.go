@@ -13,7 +13,7 @@ import (
 )
 
 func TestPrivateKeySigner(t *testing.T) {
-	privateKey, err := hex.DecodeString(test_utils.TONPrivateKeys[0])
+	privateKey, err := hex.DecodeString(test_utils.TONAccounts[0].PrivateKey)
 	require.NoError(t, err)
 	privKey := ed25519.PrivateKey(privateKey)
 	pubKey := privKey.Public().(ed25519.PublicKey)
@@ -39,11 +39,11 @@ func TestRemoteSigner(t *testing.T) {
 	require.NoError(t, err)
 
 	// 创建 RemoteSigner
-	signer, err := NewRemoteSigner(client.NewClient(userPrivateKey, "http://127.0.0.1:49152"), test_utils.TONV4R2Addresses[0], nil)
+	signer, err := NewRemoteSigner(client.NewClient(userPrivateKey, "http://127.0.0.1:49152"), test_utils.TONAccounts[0].AccountID, nil)
 	assert.NoError(t, err)
 
 	// 使用原始 PrivateKey
-	TONPrivateKey, err := hex.DecodeString(test_utils.TONPrivateKeys[0])
+	TONPrivateKey, err := hex.DecodeString(test_utils.TONAccounts[0].PrivateKey)
 	require.NoError(t, err)
 	key := ed25519.PrivateKey(TONPrivateKey)
 	// 测试 PublicKey 方法
@@ -64,12 +64,12 @@ func TestRemoteSigner(t *testing.T) {
 
 func TestSignerConsistency(t *testing.T) {
 	// 生成一个新的密钥对
-	privateKey, err := hex.DecodeString(test_utils.TONPrivateKeys[0])
+	privateKey, err := hex.DecodeString(test_utils.TONAccounts[0].PrivateKey)
 	require.NoError(t, err)
 	privKey := ed25519.PrivateKey(privateKey)
 	pubKey := privKey.Public().(ed25519.PublicKey)
 
-	testAddress := test_utils.TONV4R2Addresses[0]
+	testAddress := test_utils.TONAccounts[0].AccountID
 	testData := []byte("test message")
 
 	// 创建 PrivateKeySigner

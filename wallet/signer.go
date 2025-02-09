@@ -31,18 +31,18 @@ func (s *PrivateKeySigner) PublicKey() ed25519.PublicKey {
 
 type RemoteSigner struct {
 	client    *client.Client
-	address   string
+	accountId string
 	publicKey ed25519.PublicKey
 }
 
-func NewRemoteSigner(client *client.Client, address string, publicKey ed25519.PublicKey) (signer.Signer, error) {
-	_, err := ton.AccountIDFromBase64Url(address)
+func NewRemoteSigner(client *client.Client, accountId string, publicKey ed25519.PublicKey) (signer.Signer, error) {
+	_, err := ton.ParseAccountID(accountId)
 	if err != nil {
 		return nil, err
 	}
 
 	if publicKey == nil {
-		account, err := client.GetTONAccount(context.Background(), address)
+		account, err := client.GetTONAccount(context.Background(), accountId)
 		if err != nil {
 			return nil, err
 		}
@@ -54,13 +54,13 @@ func NewRemoteSigner(client *client.Client, address string, publicKey ed25519.Pu
 
 	return &RemoteSigner{
 		client:    client,
-		address:   address,
+		accountId: accountId,
 		publicKey: publicKey,
 	}, nil
 }
 
 func (s *RemoteSigner) Sign(data []byte) ([]byte, error) {
-	return s.client.SignTON(context.Background(), s.address, data)
+	return s.client.SignTON(context.Background(), s.accountId, data)
 }
 
 func (s *RemoteSigner) PublicKey() ed25519.PublicKey {
