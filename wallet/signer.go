@@ -41,7 +41,7 @@ func NewRemoteSigner(client *client.Client, accountId string, publicKey ed25519.
 		return nil, err
 	}
 
-	if publicKey == nil {
+	if publicKey == nil || len(publicKey) == 0 {
 		account, err := client.GetTONAccount(context.Background(), accountId)
 		if err != nil {
 			return nil, err
